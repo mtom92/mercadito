@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% if messages %}
+<ul>
+	{% for message in messages %}
+	   <li>{{ message }}</li>
+	{% endfor %}
+</ul>
+
+{% endif %}
+  <h1>Login</h1>
+  <form method="POST" action=".">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="Submit" />
+  </form>
+
+{% endblock %}
