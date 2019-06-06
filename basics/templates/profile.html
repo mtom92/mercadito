@@ -9,13 +9,63 @@
     <img src="{{path}}" alt="profile_picture" class="profile_picture">
   </div>
   <div class="col s6">
-    <h5>
-      Bio:
-    </h5>
-    {{user.profile.bio}}
+    <div class="row">
+      <h5>
+        Bio:
+      </h5>
+      {{user.profile.bio}}
+    </div>
+    <div class="row">
+      {{user.type_of_user}}
+    </div>
   </div>
 </div>
 <hr/>
 
+    {% if user.type_of_user == 'business_owner' %}
+    <!-- Modal Trigger -->
+     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">New Business/Service</a>
+
+     <!-- Modal Structure -->
+     <div id="modal1" class="modal">
+       <div class="modal-content">
+         <h4>Register Business or Service</h4>
+         <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">domain</i>
+                <input id="direction" type="text" class="validate">
+                <label for="icon_prefix">Business/Service Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">edit</i>
+                <textarea id="textarea" class="materialize-textarea"></textarea>
+                <label for="textarea1">Description</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">location_on</i>
+                <input id="direction" type="text" class="validate">
+                <label for="icon_prefix">Direction</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="telephone" type="tel" class="validate">
+                <label for="icon_telephone">Telephone</label>
+              </div>
+            </div>
+          </form>
+        </div>
+       </div>
+       <div class="modal-footer">
+         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+       </div>
+     </div>
+
+    {% endif %}
 
 {% endblock %}

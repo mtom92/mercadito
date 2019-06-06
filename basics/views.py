@@ -4,9 +4,6 @@ from basics.models import MyUser
 from .forms import LoginForm , SignUpForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.core.files.storage import FileSystemStorage
-from django.urls import reverse_lazy
-import os
 
 def index(request):
     return render(request, 'index.html')
@@ -43,7 +40,7 @@ def logout_view(request):
 
 def profile(request, id):
     user = MyUser.objects.get(id=id)
-    path = "http://localhost:8000/" + str(user.profile.avatar)
+    path = "http://localhost:8000/media/" + str(user.profile.avatar)
     return render(request, 'profile.html', {'user': user, 'path':path})
 
 
@@ -53,10 +50,6 @@ def signup(request):
         context = {}
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = request.FILES['avatar']
-            fs = FileSystemStorage()
-            name = fs.save(uploaded_file.name, uploaded_file)
-            context['url'] = fs.url(name)
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.bio = form.cleaned_data.get('bio')

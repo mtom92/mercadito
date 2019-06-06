@@ -6,3 +6,9 @@ select{
   display: block !important;
   border: 1px solid black !important;
 }
+
+.profile_picture{
+  height: 300px;
+  width: 300px;
+  border-radius: 15%;
+}
