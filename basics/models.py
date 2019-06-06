@@ -1,0 +1,34 @@
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
+USER_CHOICES= (
+ ('business_owner', 'Business Owner'),
+ ('user', 'User'),
+)
+
+class MyUser(AbstractUser):
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+    )
+    type_of_user = models.CharField(max_length=100, choices=USER_CHOICES, default='user')
+    date_of_birth = models.DateField()
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+
+    REQUIRED_FIELDS = ['date_of_birth', 'email']
+# Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    avatar = models.ImageField(upload_to='media/', null=True, blank=True)
+
+    @receiver(post_save, sender=MyUser)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()

@@ -1,0 +1,8 @@
+#nav_content{
+  margin-left: 15px !important;
+}
+
+select{
+  display: block !important;
+  border: 1px solid black !important;
+}

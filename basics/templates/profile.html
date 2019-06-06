@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="row">
+  <h4>{{ user }}'s profile</h4>
+  <div class="col s6">
+    <img src="{{path}}" alt="profile_picture" class="profile_picture">
+  </div>
+  <div class="col s6">
+    <h5>
+      Bio:
+    </h5>
+    {{user.profile.bio}}
+  </div>
+</div>
+<hr/>
+
+
+{% endblock %}
