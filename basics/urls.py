@@ -5,10 +5,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', views.login_view, name="login"),
-    path('logout/', views.logout_view, name="logout"),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('user/<id>/', views.profile, name='profile'),
     path('signup/', views.signup, name='signup'),
+    path('newbusiness/', views.newbusiness, name='newbusiness'),
+    path('business/<id>', views.business, name='business'),
 ]
 
 if settings.DEBUG:

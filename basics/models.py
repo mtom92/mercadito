@@ -2,11 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from phonenumber_field.modelfields import PhoneNumberField
 
-USER_CHOICES= (
+USER_CHOICES = (
  ('business_owner', 'Business Owner'),
  ('user', 'User'),
 )
+
+
 
 class MyUser(AbstractUser):
     email = models.EmailField(
@@ -32,3 +35,26 @@ class Profile(models.Model):
         if created:
             Profile.objects.create(user=instance)
         instance.profile.save()
+
+class TypeBusiness(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    type_of_business = models.ForeignKey(TypeBusiness, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
+class Business(models.Model):
+    owner = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=60)
+    description = models.TextField(max_length=500, blank=True)
+    direction = models.CharField(max_length=100)
+    telephone = PhoneNumberField()
+    type_of_business = models.ForeignKey(TypeBusiness, on_delete=models.SET_NULL, null=True)
+    category= models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
