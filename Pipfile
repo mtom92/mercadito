@@ -12,6 +12,7 @@ dj-database-url = "*"
 gunicorn = "*"
 mapbox = "*"
 django-phonenumber-field = "*"
+django-phonenumbers = "*"
 
 [requires]
 python_version = "3.7"
