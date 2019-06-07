@@ -13,6 +13,7 @@ gunicorn = "*"
 mapbox = "*"
 django-phonenumber-field = "*"
 django-phonenumbers = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
