@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from basics.models import MyUser, Business
-from .forms import LoginForm , SignUpForm, BusinessForm
+from .forms import LoginForm, SignUpForm, BusinessForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
 
 
 def index(request):
+    print("home route")
     return render(request, 'index.html')
 
 

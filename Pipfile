@@ -11,6 +11,7 @@ django-cors-headers = "*"
 dj-database-url = "*"
 gunicorn = "*"
 mapbox = "*"
+django-phonenumber-field = "*"
 
 [requires]
 python_version = "3.7"
