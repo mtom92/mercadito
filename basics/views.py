@@ -4,6 +4,8 @@ from basics.models import MyUser, Business
 from .forms import LoginForm , SignUpForm, BusinessForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from mapbox import Geocoder
+
 
 def index(request):
     return render(request, 'index.html')
@@ -59,9 +61,15 @@ def profile(request, id):
     return render(request, 'profile.html', {'user': user, 'path':path})
 
 def business(request, id):
+    geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw")
     business = Business.objects.get(id=id)
     mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
-    return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
+    response = geocoder.forward(business.direction, country=['us'])
+    collection = response.json()
+    print(collection)
+    print(collection['features'][0]['geometry']['coordinates'])
+    coordinates = collection['features'][0]['geometry']['coordinates']
+    return render(request, 'business.html', {'business': business, 'mapbox': mapbox, 'coordinates':coordinates})
 
 
 def signup(request):

@@ -6,16 +6,45 @@
 <h1>{{business.name}}</h1>
 
 <div id='map' width="100%" style='height:400px'></div>
- <script>
-  mapboxgl.accessToken = '{{ mapbox }}'
-  var map = new mapboxgl.Map({
-   container: 'map',
-   style: 'mapbox://styles/mapbox/satellite-streets-v10',
-    center: [-77.03, 38.91],
-    zoom: 13,
-    bearing: 180
-  });
- </script>
 
+<script>
+     mapboxgl.accessToken = '{{ mapbox }}'
+     var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v10',
+      center: {{coordinates}},
+      zoom: 13,
+      bearing: 180,
+     });
+
+
+     map.on('load', function() {
+     map.loadImage('https://res.cloudinary.com/dnkav9q9s/image/upload/v1559923832/froggo_enqndo.png', function(error, image) {
+     if (error) throw error;
+     map.addImage('cat', image);
+     map.addLayer({
+     "id": "points",
+     "type": "symbol",
+     "source": {
+     "type": "geojson",
+     "data": {
+     "type": "FeatureCollection",
+     "features": [{
+     "type": "Feature",
+     "geometry": {
+     "type": "Point",
+     "coordinates": {{coordinates}},
+     }
+     }]
+     }
+     },
+     "layout": {
+     "icon-image": "cat",
+     "icon-size": 0.06
+     }
+     });
+     });
+     });
+</script>
 
 {% endblock %}
