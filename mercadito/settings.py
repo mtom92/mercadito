@@ -153,8 +153,8 @@ STATIC_URL = '/static/'
 # this is directory paths where you have to put your project level static files
 # you can put multiple folders here
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'mercadito/static'),
-    os.path.join(BASE_DIR, 'mercadito'),
+    os.path.join(BASE_DIR, 'basics/static'),
+    os.path.join(BASE_DIR, 'basics'),
 )
 
 MEDIA_URL = '/media/'
