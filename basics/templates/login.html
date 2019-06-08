@@ -2,18 +2,18 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="container">	
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+		<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
 
-{% if messages %}
-<ul>
-	{% for message in messages %}
-	   <li>{{ message }}</li>
-	{% endfor %}
-</ul>
-
-{% endif %}
-  <h1>Login</h1>
-  <form method="POST" action=".">
-    {% csrf_token %}
+	{% endif %}
+	<h1>Login</h1>
+	<form method="POST" action=".">
+		{% csrf_token %}
 		{% for field in form %}
 
 		<div class="input_fields">
@@ -34,18 +34,12 @@
 		</div>
 
 		{% endfor %}
-
-
-
-
-
-
-
 		<div class="send_sign">
-      <button class="btn waves-effect waves-light subbot" type="submit" name="action">Go
-        <i class="material-icons right">local_activity</i>
-      </button>
+			<button class="btn waves-effect waves-light subbot" type="submit" name="action">Go
+				<i class="material-icons right">local_activity</i>
+			</button>
 		</div>
-  </form>
+	</form>
+</div>
 
 {% endblock %}
