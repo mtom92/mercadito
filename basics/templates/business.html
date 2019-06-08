@@ -12,7 +12,7 @@
      var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: {{coordinates}},
+      center: [{{business.location_latitude}} , {{business.location_longitude}}],
       zoom: 13,
       bearing: 180,
      });
@@ -33,7 +33,7 @@
      "type": "Feature",
      "geometry": {
      "type": "Point",
-     "coordinates": {{coordinates}},
+     "coordinates": [{{business.location_latitude}} , {{business.location_longitude}}],
      }
      }]
      }

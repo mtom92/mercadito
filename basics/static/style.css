@@ -12,3 +12,28 @@ select{
   width: 300px;
   border-radius: 15%;
 }
+
+.input_form{
+  display: flex !important;
+  align-items: center;
+  justify-content:flex-start;
+  margin-bottom: 5px;
+}
+
+.input_fields{
+  margin-bottom: 12px;
+}
+
+.send_sign{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.input_form label{
+  font-size: 15px !important;
+}
+
+.input_fields i {
+  margin-right: 10px;
+}

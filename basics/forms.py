@@ -25,9 +25,4 @@ class SignUpForm(UserCreationForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ('name', 'description', 'type_of_business', 'category', 'direction', 'telephone')
-
-    def __init__(self, *args, **kwargs):
-        super(BusinessForm, self).__init__(*args, **kwargs)
-        self.fields['type_of_business'].choices = list(TypeBusiness.objects.values_list('id', 'name'))
-        self.fields['category'].choices = list(Category.objects.values_list('id', 'name'))
+        fields = ('name', 'description', 'type_of_business', 'category', 'address', 'telephone')

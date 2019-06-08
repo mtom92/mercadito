@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
-import dj_database_url
+# import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ SECRET_KEY = 'ovaj$38q$9r$5$196n16_-wi)uhor58w^h+zh0h)w&v-$f7231'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-mercadito.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -83,18 +83,18 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mercadito',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mercadito',
+    }
+}
 
 # Production  database settings:
 
-DATABASE = {}
-DATABASE['default'] = dj_database_url.config(default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
-
+# DATABASE = {}
+# DATABASE['default'] = dj_database_url.config(default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
+#
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -136,26 +136,26 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-# ]
-
-# this is directory name where collectstatic files command will put your app level static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# this defines the url for static files
-# eg: base-url.com/static/your-js-file.js
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
-# this is directory paths where you have to put your project level static files
-# you can put multiple folders here
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'basics/static'),
-    os.path.join(BASE_DIR, 'basics'),
-)
+# # this is directory name where collectstatic files command will put your app level static files
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#
+# # this defines the url for static files
+# # eg: base-url.com/static/your-js-file.js
+# STATIC_URL = '/static/'
+#
+# # this is directory paths where you have to put your project level static files
+# # you can put multiple folders here
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'basics/static'),
+#     os.path.join(BASE_DIR, 'basics'),
+# )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

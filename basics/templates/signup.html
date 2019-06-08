@@ -2,25 +2,69 @@
 {% load staticfiles %}
 
 {% block content %}
-
-<h2>Sign up</h2>
+<div class="container">
+  <h2>Sign up</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form %}
-        <p>
-            {{ field.label_tag }}<br>
-            {{ field }}
-        </p>
-        {% if field.help_text %}
-          <small style="color: blue">{{ field.help_text }}</small>
+
+    <div class="input_fields">
+
+      <div class="input_form">
+        {% if field.name == "username" %}
+        <i class="material-icons">account_box</i>
+        {{ field.label_tag }}
+        {% elif field.name == "email" %}
+        <i class="material-icons">markunread_mailbox</i>
+        {{ field.label_tag }}
+        {% elif field.name == "first_name" %}
+        <i class="material-icons">face</i>
+        {{ field.label_tag }}
+        {% elif field.name == "last_name" %}
+        <i class="material-icons">face</i>
+        {{ field.label_tag }}
+        {% elif field.name == "date_of_birth" %}
+        <i class="material-icons">cake</i>
+        {{ field.label_tag }}
+        {% elif field.name == "password1" %}
+        <i class="material-icons">vpn_key</i>
+        {{ field.label_tag }}
+        {% elif field.name == "password2" %}
+        <i class="material-icons">vpn_key</i>
+        {{ field.label_tag }}
+        {% elif field.name == "bio" %}
+        <i class="material-icons">edit</i>
+        {{ field.label_tag }}
+        {% elif field.name == "type_of_user" %}
+        <i class="material-icons">contacts</i>
+        {{ field.label_tag }}
+        {% elif field.name == "avatar" %}
+        <i class="material-icons">grade</i>
+        {{ field.label_tag }}
         {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
+
+      </div>
+      <div>
+        {{ field }}
+      </div>
+      {% if field.help_text %}
+      <small style="color: blue">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+      <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </div>
 
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <div class="send_sign">  
+      <button class="btn waves-effect waves-light subbot" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+
   </form>
+
+</div>
 
 
 {% endblock %}

@@ -44,8 +44,16 @@ def newbusiness(request):
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
+            print(form)
             business = form.save(commit = False)
+            geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw")
+            response = geocoder.forward(business.address, country=['us'])
+            collection = response.json()
+            coordinates = collection['features'][0]['geometry']['coordinates']
+            business.location_latitude =coordinates[0]
+            business.location_longitude =coordinates[1]
             business.owner = request.user
+
             business.save()
             return HttpResponseRedirect('/')
         else:
@@ -62,21 +70,13 @@ def profile(request, id):
     return render(request, 'profile.html', {'user': user, 'path':path})
 
 def business(request, id):
-    geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw")
     business = Business.objects.get(id=id)
     mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
-    response = geocoder.forward(business.direction, country=['us'])
-    collection = response.json()
-    print(collection)
-    print(collection['features'][0]['geometry']['coordinates'])
-    coordinates = collection['features'][0]['geometry']['coordinates']
-    return render(request, 'business.html', {'business': business, 'mapbox': mapbox, 'coordinates':coordinates})
+    return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
 
 
 def signup(request):
     if request.method == 'POST':
-        print(request.FILES)
-        context = {}
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
