@@ -2,31 +2,29 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="container">
+  <div class="row">
+    <h4>{{ user }}'s profile</h4>
+    <div class="col s6">
+      <img src="{{path}}" alt="profile_picture" class="profile_picture">
+    </div>
+    <div class="col s6">
+      <div class="row">
+        <h5>
+          Bio:
+        </h5>
+        {{user.profile.bio}}
+      </div>
+      <div class="row">
+        {{user.type_of_user}}
+      </div>
+    </div>
+  </div>
+  <hr/>
 
-<div class="row">
-  <h4>{{ user }}'s profile</h4>
-  <div class="col s6">
-    <img src="{{path}}" alt="profile_picture" class="profile_picture">
-  </div>
-  <div class="col s6">
-    <div class="row">
-      <h5>
-        Bio:
-      </h5>
-      {{user.profile.bio}}
-    </div>
-    <div class="row">
-      {{user.type_of_user}}
-    </div>
-  </div>
+  {% if user.type_of_user == 'business_owner' %}
+  <a class="waves-effect waves-light btn modal-trigger" href="/newbusiness">New Business/Service</a>
+  {% endif %}
 </div>
-<hr/>
-
-    {% if user.type_of_user == 'business_owner' %}
-    <!-- Modal Trigger -->
-     <a class="waves-effect waves-light btn modal-trigger" href="/newbusiness">New Business/Service</a>
-
-
-    {% endif %}
 
 {% endblock %}
