@@ -39,6 +39,7 @@ select{
 }
 
 .first_block{
-  height: 30vw;
+  height: 40vw;
   background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1559970285/mercadok_zf9d5a.jpg");
+  background-size: cover;
 }

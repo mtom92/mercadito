@@ -2,49 +2,50 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="container">
+  <h1>{{business.name}}</h1>
 
-<h1>{{business.name}}</h1>
+  <div id='map' width="100%" style='height:400px'></div>
 
-<div id='map' width="100%" style='height:400px'></div>
-
-<script>
-     mapboxgl.accessToken = '{{ mapbox }}'
-     var map = new mapboxgl.Map({
+  <script>
+    mapboxgl.accessToken = '{{ mapbox }}'
+    var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [{{business.location_latitude}} , {{business.location_longitude}}],
       zoom: 13,
       bearing: 180,
-     });
+    });
 
 
-     map.on('load', function() {
-     map.loadImage('https://res.cloudinary.com/dnkav9q9s/image/upload/v1559923832/froggo_enqndo.png', function(error, image) {
-     if (error) throw error;
-     map.addImage('cat', image);
-     map.addLayer({
-     "id": "points",
-     "type": "symbol",
-     "source": {
-     "type": "geojson",
-     "data": {
-     "type": "FeatureCollection",
-     "features": [{
-     "type": "Feature",
-     "geometry": {
-     "type": "Point",
-     "coordinates": [{{business.location_latitude}} , {{business.location_longitude}}],
-     }
-     }]
-     }
-     },
-     "layout": {
-     "icon-image": "cat",
-     "icon-size": 0.06
-     }
-     });
-     });
-     });
-</script>
+    map.on('load', function() {
+      map.loadImage('https://res.cloudinary.com/dnkav9q9s/image/upload/v1559923832/froggo_enqndo.png', function(error, image) {
+        if (error) throw error;
+        map.addImage('cat', image);
+        map.addLayer({
+          "id": "points",
+          "type": "symbol",
+          "source": {
+            "type": "geojson",
+            "data": {
+              "type": "FeatureCollection",
+              "features": [{
+                "type": "Feature",
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [{{business.location_latitude}} , {{business.location_longitude}}],
+                }
+              }]
+            }
+          },
+          "layout": {
+            "icon-image": "cat",
+            "icon-size": 0.06
+          }
+        });
+      });
+    });
+  </script>  
+</div>
 
 {% endblock %}
