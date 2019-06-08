@@ -37,3 +37,8 @@ select{
 .input_fields i {
   margin-right: 10px;
 }
+
+.first_block{
+  height: 30vw;
+  background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1559970285/mercadok_zf9d5a.jpg");
+}
