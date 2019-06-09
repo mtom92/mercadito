@@ -26,20 +26,44 @@
   <div class="col s4">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator cardimg" src="/media/{{business.logo}}">
+        {% if not business.logo %}
+           <img class="activator cardimg" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560109815/nologo_fpjpnn.jpg">
+        {% else %}
+           <img class="activator cardimg" src="/media/{{business.logo}}">
+        {%endif%}
+
       </div>
       <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">{{business.name}}<i class="material-icons right">more_vert</i></span>
         <p><a href="/business/{{business.id}}">View More</a></p>
       </div>
       <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{business.name}}<i class="material-icons right">close</i></span>
+        <span class="card-title grey-text text-darken-4">{{business.name}}<i class="material-icons right closi">close</i></span>
+        {% if business.type_of_business|stringformat:"s" == "services"  %}
+          <p class="result_service">Type : Service</p>
+          {% elif business.type_of_business|stringformat:"s" == "products"  %}
+            <p class="result_product">Type : Shop/Restaurant</p>
+        {% endif %}
+        {% if business.category|stringformat:"s" == "plumber"  %}
+          <p class="category_plumber">Category : Plumber</p>
+        {% elif business.category|stringformat:"s" == "restaurant"  %}
+          <p class="category_restaurant">Category: Restaurant</p>
+        {% elif business.category|stringformat:"s" == "additions_remodels"  %}
+          <p class="category_additions_remodels">Category: Additions & Remodels</p>
+        {% elif business.category|stringformat:"s" == "carpentry"  %}
+          <p class="category_carpentry">Category: Carpentry</p>
+        {% elif business.category|stringformat:"s" == "jewlery_shop"  %}
+          <p class="category_jewlery_shop">Category: Jewlery Shop</p>
+        {% elif business.category|stringformat:"s" == "crafts_shop"  %}
+          <p class="category_crafts_shop">Category: Crafts Shop</p>
+        {% endif %}
+        <h6>Description:</h6>
         <p>{{business.description}}</p>
       </div>
     </div>
   </div>
 
-  
+
   {% if forloop.last or forloop.counter|modulo:3 == 0 %}
       </div>
   {% endif %}

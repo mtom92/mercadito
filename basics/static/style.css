@@ -13,6 +13,9 @@ select{
   border-radius: 15%;
 }
 
+.form_search{
+  margin-top: 2vw;
+}
 .input_form{
   display: flex !important;
   align-items: center;
@@ -91,4 +94,63 @@ div .results{
   flex-direction:row;
   flex-wrap: wrap;
   align-items:flex-start;
+}
+
+.banner{
+  height: 5vw;
+  background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1560101917/spanishclubheader_p3bakf.png");
+  background-size:contain;
+}
+
+.result_product{
+  background-color: #49ede7;
+  width: 170px;
+  border-radius: 10px
+}
+
+.result_service{
+  background-color: yellow;
+  width: 100px;
+  border-radius: 10px
+}
+
+.closi{
+position: fixed;
+top: 20px;
+right: 10px;
+}
+
+.category_plumber{
+  background-color: #4286f4;
+  width: 140px;
+  border-radius: 10px
+}
+
+.category_restaurant{
+  background-color: #41caf4;
+  width: 160px;
+  border-radius: 10px
+}
+
+.category_additions_remodels{
+  background-color: #41f4d6;
+  width: 100px;
+  border-radius: 10px
+}
+
+.category_carpentry{
+  background-color: #f4af41;
+  width: 100px;
+  border-radius: 10px
+}
+.category_jewlery_shop{
+  background-color:#9441f4;
+  width: 180px;
+  border-radius: 10px
+}
+
+.category_crafts_shop{
+  background-color: #6d062a;
+  width: 100px;
+  border-radius: 10px
 }
