@@ -2,26 +2,62 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="container">
+  <h2>New Business</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
 
+    <div class="input_fields">
 
-<h1>New Business</h1>
+      <div class="input_form">
+        {% if field.name == "name" %}
+        <i class="material-icons">business_center</i>
+        {{ field.label_tag }}
+        {% elif field.name == "description" %}
+        <i class="material-icons">edit</i>
+        {{ field.label_tag }}
+        {% elif field.name == "address" %}
+        <i class="material-icons">location_on</i>
+        {{ field.label_tag }}
+        {% elif field.name == "telephone" %}
+        <i class="material-icons">contact_phone</i>
+        {{ field.label_tag }}
+        {% elif field.name == "type_of_business" %}
+        <i class="material-icons">star_border</i>
+        {{ field.label_tag }}
+        {% elif field.name == "category" %}
+        <i class="material-icons">poll</i>
+        {{ field.label_tag }}
+        {% elif field.name == "logo" %}
+        <i class="material-icons">crop_original</i>
+        {{ field.label_tag }}
+        {% elif field.name == "photo" %}
+        <i class="material-icons">photo_camera</i>
+        {{ field.label_tag }}
+        {% endif %}
 
-<form method="post" >
-  {% csrf_token %}
-  {% for field in form %}
-      <p>
-          {{ field.label_tag }}<br>
-          {{ field }}
-      </p>
+      </div>
+      <div>
+        {{ field }}
+      </div>
       {% if field.help_text %}
-        <small style="color: blue">{{ field.help_text }}</small>
+      <small style="color: blue">{{ field.help_text }}</small>
       {% endif %}
       {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
+      <p style="color: red">{{ error }}</p>
       {% endfor %}
+    </div>
 
-  {% endfor %}
-  <button type="submit">Sign up</button>
-</form>
+    {% endfor %}
+    <div class="send_sign">
+      <button class="btn waves-effect waves-light subbot" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+
+  </form>
+
+</div>
 
 {% endblock %}

@@ -54,7 +54,6 @@ def newbusiness(request):
             business.location_latitude =coordinates[0]
             business.location_longitude =coordinates[1]
             business.owner = request.user
-
             business.save()
             return HttpResponseRedirect('/')
         else:
@@ -103,7 +102,7 @@ def search(request):
         print("this is the form",form)
         if form.is_valid():
             s = form.cleaned_data['searcher']
-            result = Business.objects.filter(name__contains='Cafecito')
+            result = Business.objects.filter(name__icontains=s)
             return render(request, 'search_result.html', {'result':result})
         else:
             print("form was not valid",form.errors)

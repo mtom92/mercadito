@@ -28,4 +28,4 @@ class SignUpForm(UserCreationForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ('name', 'description', 'type_of_business', 'category', 'address', 'telephone')
+        fields = ('name', 'description','logo','address', 'telephone', 'type_of_business', 'category','photo')

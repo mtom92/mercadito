@@ -1,36 +1,53 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load my_tags %}
 
 {% block content %}
 <div>
-  <form class="form_search" method="get">
+  <form action="/search" class="form_search" method="get">
     <div class="row mainsearch">
       <div class="input-field col s12 ">
         <i class="material-icons prefix">search</i>
-        <input type="text" id="autocomplete-input" class="autocomplete">
+        <input type="text" name="searcher" id="searcher">
         <label for="autocomplete-input">What are you looking for?</label>
       </div>
       <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
     </div>
   </form>
 </div>
-<div >
+<div class="container">
   {% csrf_token %}
-  {% for business in result %}
-      <div class="card">
+
+    {% for  business in result %}
+    {% if forloop.counter|modulo:3 == 1 %}
+      <div class="row">
+  {% endif %}
+
+  <div class="col s4">
+    <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="">
+        <img class="activator cardimg" src="/media/{{business.logo}}">
       </div>
       <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">{{business.name}}<i class="material-icons right">more_vert</i></span>
-        <p><a href="#">This is a link</a></p>
+        <p><a href="/business/{{business.id}}">View More</a></p>
       </div>
       <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        <span class="card-title grey-text text-darken-4">{{business.name}}<i class="material-icons right">close</i></span>
+        <p>{{business.description}}</p>
       </div>
     </div>
+  </div>
 
-  {% endfor %}
+  
+  {% if forloop.last or forloop.counter|modulo:3 == 0 %}
+      </div>
+  {% endif %}
+
+      {% endfor %}
+  </div>
+
+
+
 </div>
 {% endblock %}
