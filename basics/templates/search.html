@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div>
+  <form class="form_search" method="get">
+    <div class="row mainsearch">
+      <div class="input-field col s12 ">
+        <i class="material-icons prefix">search</i>
+        <input type="text" id="autocomplete-input" class="autocomplete">
+        <label for="autocomplete-input">What are you looking for?</label>
+      </div>
+      <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

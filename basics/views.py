@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from basics.models import MyUser, Business
-from .forms import LoginForm, SignUpForm, BusinessForm
+from .forms import LoginForm, SignUpForm, BusinessForm, Search
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
+from . models import Business
 
 
 def index(request):
@@ -94,3 +95,19 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def search(request):
+    if request.method == 'GET':
+        form = Search(request.GET)
+        print("this is the form",form)
+        if form.is_valid():
+            s = form.cleaned_data['searcher']
+            result = Business.objects.filter(name__contains='Cafecito')
+            return render(request, 'search_result.html', {'result':result})
+        else:
+            print("form was not valid",form.errors)
+            print("fields error", form.non_field_errors )
+            return render(request, 'search.html', {'form': form})
+    else:
+        return render(request, 'search.html')

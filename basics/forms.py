@@ -7,6 +7,9 @@ class LoginForm(forms.Form):
     username = forms.CharField(label="User Name", max_length=64)
     password = forms.CharField(widget=forms.PasswordInput())
 
+class Search(forms.Form):
+    searcher = forms.CharField(max_length=64)
+
 USER_CHOICES= (
  ('business_owner', 'Business Owner'),
  ('user', 'User'),
