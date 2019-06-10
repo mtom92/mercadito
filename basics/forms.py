@@ -10,6 +10,9 @@ class LoginForm(forms.Form):
 class Search(forms.Form):
     searcher = forms.CharField(max_length=64)
 
+class SearchBusiness(forms.Form):
+    type = forms.CharField(max_length=64)
+
 USER_CHOICES= (
  ('business_owner', 'Business Owner'),
  ('user', 'User'),

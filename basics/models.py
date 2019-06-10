@@ -71,5 +71,5 @@ class Business(models.Model):
         return self.name
 
 class Favorites(models.Model):
-    person = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    business = models.ForeignKey(Business, on_delete=models.SET_NULL, null=True)
+    person = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)

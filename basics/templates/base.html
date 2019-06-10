@@ -11,9 +11,9 @@
   </head>
   <body>
     <div >
-      <nav>
+      <nav class="blue-grey darken-3">
         <div class="nav-wrapper">
-       <a href="{% url 'index' %}" class="brand-logo">Logo</a>
+       <a href="{% url 'index' %}" class="brand-logo"> <img class="nav_logo" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560154753/mercadito_ok_iuqnho.png" alt=""> </a>
        <ul id="nav-mobile" class="right hide-on-med-and-down">
          {% if user.is_authenticated %}
          <li> <a  href="{% url 'profile' user.id %}"> Hello ,{{ user.username }}!</a></li>
@@ -32,7 +32,7 @@
         {% block content %}
         {% endblock %}
     </div>
-    <footer class="page-footer">
+    <footer class="page-footer blue-grey darken-3">
       All Rights Reserved, CatCollectr 2017
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

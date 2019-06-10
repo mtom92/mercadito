@@ -12,6 +12,7 @@ urlpatterns = [
     path('newbusiness/', views.newbusiness, name='newbusiness'),
     path('business/<id>', views.business, name='business'),
     path('search/', views.search, name='search'),
+    path('searchb/', views.searchb, name='searchb'),
 
     path('ajax/load-categories/', views.load_categories, name='ajax_load_categories'),
 ]

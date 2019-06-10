@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from basics.models import MyUser, Business
-from .forms import LoginForm, SignUpForm, BusinessForm, Search, FavoritesForm
+from .forms import LoginForm, SignUpForm, BusinessForm, Search, FavoritesForm, SearchBusiness
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
@@ -45,7 +45,6 @@ def newbusiness(request):
     if request.method == 'POST' and request.user.is_authenticated:
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form)
             business = form.save(commit = False)
             geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw")
             response = geocoder.forward(business.address, country=['us'])
@@ -65,23 +64,40 @@ def newbusiness(request):
 
 
 def profile(request, id):
-    if Favorites.objects.filter(person_id=id):
-        fav = Favorites.objects.filter(person_id=id)
-        person = MyUser.objects.get(id=id)
-        path = "http://localhost:8000/media/" + str(person.profile.avatar)
-        return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav})
+    if request.user.type_of_user == 'business_owner':
+        if Favorites.objects.filter(person_id=id):
+            fav = Favorites.objects.filter(person_id=id)
+            person = MyUser.objects.get(id=id)
+            if Business.objects.filter(owner=id):
+                businesses = Business.objects.filter(owner=id)
+            else:
+                businesses = []
+            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            print(businesses)
+            return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav,"businesses":businesses})
+
+        else:
+            person = MyUser.objects.get(id=id)
+            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            return render(request, 'profile.html', {'person': person, 'path':path})
 
     else:
-        person = MyUser.objects.get(id=id)
-        path = "http://localhost:8000/media/" + str(person.profile.avatar)
-        return render(request, 'profile.html', {'person': person, 'path':path})
+        if Favorites.objects.filter(person_id=id):
+            fav = Favorites.objects.filter(person_id=id)
+            person = MyUser.objects.get(id=id)
+            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav})
+
+        else:
+            person = MyUser.objects.get(id=id)
+            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            return render(request, 'profile.html', {'person': person, 'path':path})
 
 
 def business(request, id):
     if request.method == 'POST':
         form = FavoritesForm(request.POST)
         if form.is_valid():
-            print(form)
             form.save()
             business = Business.objects.get(id=id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
@@ -128,10 +144,24 @@ def signup(request):
 def search(request):
     if request.method == 'GET':
         form = Search(request.GET)
-        print("this is the form",form)
         if form.is_valid():
             s = form.cleaned_data['searcher']
             result = Business.objects.filter(name__icontains=s)
+            return render(request, 'search_result.html', {'result':result})
+        else:
+            print("form was not valid",form.errors)
+            print("fields error", form.non_field_errors )
+            return render(request, 'search.html', {'form': form})
+    else:
+        return render(request, 'search.html')
+
+def searchb(request):
+    if request.method == 'GET':
+        form = SearchBusiness(request.GET)
+        print("this is the form",form)
+        if form.is_valid():
+            s = form.cleaned_data['type']
+            result = Business.objects.filter(typebusiness_id=s)
             return render(request, 'search_result.html', {'result':result})
         else:
             print("form was not valid",form.errors)

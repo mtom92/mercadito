@@ -16,4 +16,45 @@
       </form>
     </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <h3>Types of Business</h3>
+      <div class="col s6">
+        <div class="card">
+        <div class="card-image">
+          <img class="img_type" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560158966/shop_npglcr.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title">SHOPS / RESTAURANTS</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <form action="/searchb"  method="get">
+              <input type="hidden" name="type" id="type" value=2>
+              <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
+          </form>
+        </div>
+      </div>
+      </div>
+      <div class="col s6">
+        <div class="card">
+        <div class="card-image">
+          <img class="img_type" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560159211/service_ioa56l.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title">SERVICES</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <form action="/searchb"  method="get">
+              <input type="hidden" name="type" id="type" value=1>
+              <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
