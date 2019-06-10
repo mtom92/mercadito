@@ -65,9 +65,17 @@ def newbusiness(request):
 
 
 def profile(request, id):
-    user = MyUser.objects.get(id=id)
-    path = "http://localhost:8000/media/" + str(user.profile.avatar)
-    return render(request, 'profile.html', {'user': user, 'path':path})
+    if Favorites.objects.filter(person_id=request.user.id):
+        fav = Favorites.objects.filter(person_id=request.user.id)
+        user = MyUser.objects.get(id=id)
+        path = "http://localhost:8000/media/" + str(user.profile.avatar)
+        return render(request, 'profile.html', {'user': user, 'path':path,"fav":fav})
+
+    else:
+        user = MyUser.objects.get(id=id)
+        path = "http://localhost:8000/media/" + str(user.profile.avatar)
+        return render(request, 'profile.html', {'user': user, 'path':path})
+
 
 def business(request, id):
     if request.method == 'POST':
@@ -86,7 +94,7 @@ def business(request, id):
 
     else:
         business = Business.objects.get(id=id)
-        if Favorites.objects.filter(business_id=business.id):
+        if Favorites.objects.filter(person_id=request.user.id):
             fav = Favorites.objects.filter(person_id=request.user.id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})

@@ -3,6 +3,9 @@
 
 {% block content %}
 <div class="container">
+  <div class="first_part">
+
+  </div>
   <div class="row">
     <h4>{{ user }}'s profile</h4>
     <div class="col s6">
@@ -11,11 +14,20 @@
     <div class="col s6">
       <div class="row">
         <h5>
+          {{user.first_name}} {{user.last_name}}
+        </h5>
+
+      </div>
+      <div class="row">
+        <h5>
           Bio:
         </h5>
         {{user.profile.bio}}
       </div>
       <div class="row">
+        <h5>
+          Type of user:
+        </h5>
         {{user.type_of_user}}
       </div>
     </div>
@@ -25,6 +37,9 @@
   {% if user.type_of_user == 'business_owner' %}
   <a class="waves-effect waves-light btn modal-trigger" href="/newbusiness">New Business/Service</a>
   {% endif %}
+  <div class="row">
+    {{fav}}
+  </div>
 </div>
 
 {% endblock %}
