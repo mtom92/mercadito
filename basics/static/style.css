@@ -140,7 +140,7 @@ right: 10px;
 
 .category_carpentry{
   background-color: #f4af41;
-  width: 100px;
+  width: 165px;
   border-radius: 10px
 }
 .category_jewlery_shop{
@@ -153,4 +153,13 @@ right: 10px;
   background-color: #6d062a;
   width: 100px;
   border-radius: 10px
+}
+
+.business_logo{
+  height: 10vw;
+}
+
+.owner_photo{
+  height: 8vw;
+  border-radius: 50%;
 }

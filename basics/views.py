@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from basics.models import MyUser, Business
-from .forms import LoginForm, SignUpForm, BusinessForm, Search
+from .forms import LoginForm, SignUpForm, BusinessForm, Search, FavoritesForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
-from . models import Business
+from . models import Business , Favorites
 
 
 def index(request):
@@ -43,7 +43,7 @@ def logout_view(request):
 
 def newbusiness(request):
     if request.method == 'POST':
-        form = BusinessForm(request.POST)
+        form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             print(form)
             business = form.save(commit = False)
@@ -70,9 +70,30 @@ def profile(request, id):
     return render(request, 'profile.html', {'user': user, 'path':path})
 
 def business(request, id):
-    business = Business.objects.get(id=id)
-    mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
-    return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
+    if request.method == 'POST':
+        form = FavoritesForm(request.POST)
+        if form.is_valid():
+            print(form)
+            form.save()
+            business = Business.objects.get(id=id)
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            fav = Favorites.objects.filter(person_id=request.user.id)
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
+        else:
+            business = Business.objects.get(id=id)
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
+
+    else:
+        business = Business.objects.get(id=id)
+        if Favorites.objects.filter(business_id=business.id):
+            fav = Favorites.objects.filter(person_id=request.user.id)
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
+        else:
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
+
 
 
 def signup(request):

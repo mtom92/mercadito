@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from basics.models import MyUser, Business, TypeBusiness, Category
+from basics.models import MyUser, Business, TypeBusiness, Category, Favorites
 
 
 class LoginForm(forms.Form):
@@ -29,3 +29,8 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ('name', 'description','logo','address', 'telephone', 'type_of_business', 'category','photo')
+
+class FavoritesForm(forms.ModelForm):
+    class Meta:
+        model = Favorites
+        fields = ('person','business')

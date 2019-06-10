@@ -62,3 +62,11 @@ class Business(models.Model):
     location_longitude = models.CharField('Longitude', max_length=20, null=True, blank=True)
     photo = models.ImageField(upload_to='media/', null=True, blank=True)
     logo = models.ImageField(upload_to='media/', null=True, blank=True)
+
+
+    def __str__(self):
+        return self.name
+
+class Favorites(models.Model):
+    person = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
+    business = models.ForeignKey(Business, on_delete=models.SET_NULL, null=True)
