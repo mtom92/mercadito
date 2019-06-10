@@ -5,7 +5,7 @@ from .forms import LoginForm, SignUpForm, BusinessForm, Search, FavoritesForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
-from . models import Business , Favorites
+from . models import Business , Favorites, TypeBusiness, Category
 
 
 def index(request):
@@ -42,7 +42,7 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 def newbusiness(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             print(form)
@@ -65,16 +65,16 @@ def newbusiness(request):
 
 
 def profile(request, id):
-    if Favorites.objects.filter(person_id=request.user.id):
-        fav = Favorites.objects.filter(person_id=request.user.id)
-        user = MyUser.objects.get(id=id)
-        path = "http://localhost:8000/media/" + str(user.profile.avatar)
-        return render(request, 'profile.html', {'user': user, 'path':path,"fav":fav})
+    if Favorites.objects.filter(person_id=id):
+        fav = Favorites.objects.filter(person_id=id)
+        person = MyUser.objects.get(id=id)
+        path = "http://localhost:8000/media/" + str(person.profile.avatar)
+        return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav})
 
     else:
-        user = MyUser.objects.get(id=id)
-        path = "http://localhost:8000/media/" + str(user.profile.avatar)
-        return render(request, 'profile.html', {'user': user, 'path':path})
+        person = MyUser.objects.get(id=id)
+        path = "http://localhost:8000/media/" + str(person.profile.avatar)
+        return render(request, 'profile.html', {'person': person, 'path':path})
 
 
 def business(request, id):
@@ -94,7 +94,7 @@ def business(request, id):
 
     else:
         business = Business.objects.get(id=id)
-        if Favorites.objects.filter(person_id=request.user.id):
+        if Favorites.objects.filter(person_id=request.user.id).filter(business_id=business.id):
             fav = Favorites.objects.filter(person_id=request.user.id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
@@ -139,3 +139,9 @@ def search(request):
             return render(request, 'search.html', {'form': form})
     else:
         return render(request, 'search.html')
+
+
+def load_categories(request):
+    typebusiness_id = request.GET.get('typebusiness')
+    categories = Category.objects.filter(typebusiness_id=typebusiness_id).order_by('name')
+    return render(request, 'hr/category_dropdown_list_options.html', {'categories': categories})

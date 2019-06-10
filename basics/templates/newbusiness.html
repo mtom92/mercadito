@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container">
   <h2>New Business</h2>
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" id="businessForm" data-categories-url="{% url 'ajax_load_categories' %}" novalidate>
     {% csrf_token %}
     {% for field in form %}
 
@@ -60,4 +60,7 @@
 
 </div>
 
+
+<script>
+  </script>
 {% endblock %}

@@ -11,12 +11,16 @@
     </div>
     <div class="row">
       <div class="col s6">
-        <img class="business_logo" src="/media/{{business.logo}}">
-        {% if fav %}
+        {%if business.logo %}
+        <img class="business_logo" src="/media/{{business.logo}}"><br>
+        {% else%}
+        <img class="business_logo" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560109815/nologo_fpjpnn.jpg"><br>
+        {% endif %}
+        {% if fav and user.is_authenticated %}
         <button class="btn waves-effect waves-light subbot" >You like it
           <i class="material-icons right">favorite_border</i>
         </button>
-        {% else %}
+        {% elif user.is_authenticated %}
         <form  method="post">
           {% csrf_token %}
           <input type="hidden" name="person" value="{{business.owner.id}}">
