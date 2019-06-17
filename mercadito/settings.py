@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 # Production  database settings:
 
 DATABASE = {}
-DATABASE['default']['Engine'] = dj_database_url.config(
+DATABASE['default'] = dj_database_url.config(
 default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
