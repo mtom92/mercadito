@@ -25,8 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ovaj$38q$9r$5$196n16_-wi)uhor58w^h+zh0h)w&v-$f7231'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
+# YOU NEED TO ADD YOUR HEROKU PAGE NAME FOR DEPLOYMENT
 ALLOWED_HOSTS = ['django-mercadito.herokuapp.com']
 
 
