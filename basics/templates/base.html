@@ -6,35 +6,37 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
   </head>
   <body>
     <div >
-      <nav>
-        <div id="nav_content">
-          <a  href="{% url 'index' %}">Mercadito</a>
-          {% if user.is_authenticated %}
-          Hello,<a  href="{% url 'profile' user.id %}"> {{ user.username }}!</a>
-          <a  href="{% url 'logout' %}">Logout</a>
-          {% else %}
-          <a  href="{% url 'login' %}">Login</a>
-          {% endif %}
+      <nav class="blue-grey darken-3">
+        <div class="nav-wrapper">
+       <a href="{% url 'index' %}" class="brand-logo"> <img class="nav_logo" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560154753/mercadito_ok_iuqnho.png" alt=""> </a>
+       <ul id="nav-mobile" class="right hide-on-med-and-down">
+         {% if user.is_authenticated %}
+         <li> <a  href="{% url 'profile' user.id %}"> Hello ,{{ user.username }}!</a></li>
+         <li><a  href="{% url 'logout' %}">Logout</a></li>
+         {% else %}
+         <li><a  href="{% url 'login' %}">Login</a></li>
+         <li><a  href="{% url 'signup' %}">Signup</a></li>
+         {% endif %}
+       </ul>
+     </div>
 
-        </div>
+
       </nav>
     </div>
-    <div class="container">
+    <div>
         {% block content %}
         {% endblock %}
-
-        <footer>
-          All Rights Reserved, CatCollectr 2017
-        </footer>
     </div>
+    <footer class="page-footer blue-grey darken-3">
+      All Rights Reserved, CatCollectr 2017
+    </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="{% static 'app.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"/></script>
   </body>
 </html>

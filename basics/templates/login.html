@@ -2,20 +2,44 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="container">	
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+		<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
 
-{% if messages %}
-<ul>
-	{% for message in messages %}
-	   <li>{{ message }}</li>
-	{% endfor %}
-</ul>
+	{% endif %}
+	<h1>Login</h1>
+	<form method="POST" action=".">
+		{% csrf_token %}
+		{% for field in form %}
 
-{% endif %}
-  <h1>Login</h1>
-  <form method="POST" action=".">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value="Submit" />
-  </form>
+		<div class="input_fields">
+
+			<div class="input_form">
+				{% if field.name == "username" %}
+				<i class="material-icons">account_box</i>
+				{{ field.label_tag }}
+				{% elif field.name == "password" %}
+				<i class="material-icons">vpn_key</i>
+				{{ field.label_tag }}
+				{% endif %}
+
+			</div>
+			<div>
+				{{ field }}
+			</div>
+		</div>
+
+		{% endfor %}
+		<div class="send_sign">
+			<button class="btn waves-effect waves-light subbot" type="submit" name="action">Go
+				<i class="material-icons right">local_activity</i>
+			</button>
+		</div>
+	</form>
+</div>
 
 {% endblock %}

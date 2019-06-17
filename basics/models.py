@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from phonenumber_field.modelfields import PhoneNumberField
+from smart_selects.db_fields import ChainedForeignKey
 
 USER_CHOICES = (
  ('business_owner', 'Business Owner'),
@@ -43,7 +44,7 @@ class TypeBusiness(models.Model):
         return self.name
 
 class Category(models.Model):
-    type_of_business = models.ForeignKey(TypeBusiness, on_delete=models.CASCADE)
+    typebusiness = models.ForeignKey(TypeBusiness, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
 
     def __str__(self):
@@ -54,7 +55,21 @@ class Business(models.Model):
     owner = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=60)
     description = models.TextField(max_length=500, blank=True)
-    direction = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
     telephone = PhoneNumberField()
-    type_of_business = models.ForeignKey(TypeBusiness, on_delete=models.SET_NULL, null=True)
+    typebusiness = models.ForeignKey(TypeBusiness, on_delete=models.SET_NULL, null=True)
     category= models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    location_latitude = models.CharField('Latitude', max_length=20, null=True, blank=True)
+    location_longitude = models.CharField('Longitude', max_length=20, null=True, blank=True)
+    photo = models.ImageField(upload_to='media/', null=True, blank=True)
+    logo = models.ImageField(upload_to='media/', null=True, blank=True)
+
+
+
+
+    def __str__(self):
+        return self.name
+
+class Favorites(models.Model):
+    person = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)

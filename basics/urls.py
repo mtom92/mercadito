@@ -11,8 +11,11 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('newbusiness/', views.newbusiness, name='newbusiness'),
     path('business/<id>', views.business, name='business'),
+    path('search/', views.search, name='search'),
+    path('searchb/', views.searchb, name='searchb'),
+
+    path('ajax/load-categories/', views.load_categories, name='ajax_load_categories'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    print("hello")
