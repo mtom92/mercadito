@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from phonenumber_field.modelfields import PhoneNumberField
-from smart_selects.db_fields import ChainedForeignKey
 
 USER_CHOICES = (
  ('business_owner', 'Business Owner'),
