@@ -14,6 +14,7 @@ mapbox = "*"
 django-phonenumber-field = "*"
 django-phonenumbers = "*"
 whitenoise = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
