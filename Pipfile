@@ -15,6 +15,7 @@ django-phonenumber-field = "*"
 django-phonenumbers = "*"
 whitenoise = "*"
 pillow = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
