@@ -1,3 +1,14 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+
 #nav_content{
   margin-left: 15px !important;
 }
@@ -18,9 +29,7 @@ select{
   border-radius: 15%;
 }
 
-.form_search{
-  margin-top: 2vw;
-}
+
 .input_form{
   display: flex !important;
   align-items: center;
@@ -47,51 +56,41 @@ select{
 }
 
 .first_block{
-  height: 35vw;
+  height: 30em;
   background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1559970285/mercadok_zf9d5a.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-size: cover;
 }
 
 .mainsearch{
   background-color: white;
-  width: 30vw;
   border: 4px solid black;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.searcher{
-  position:absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.search_label{
+  width: 100% !important;
 }
 
-.mainsearch .subbot{
-  margin-right: 1vw;
-}
 
 .mainsearch .waves-effect{
   overflow: visible !important;
 }
-
-
-
-/* footer {
-  position:fixed;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
-  z-index: 3;
-} */
 
 .container{
   padding-bottom: 5vw !important;
 }
 
 .cardimg{
-  height: 15vw;
+  height: 300px;
 }
 
 div .results{

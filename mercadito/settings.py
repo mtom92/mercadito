@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
-import dj_database_url
+
+# uncomment this for deply
+# import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +30,9 @@ SECRET_KEY = 'ovaj$38q$9r$5$196n16_-wi)uhor58w^h+zh0h)w&v-$f7231'
 DEBUG = True
 
 # YOU NEED TO ADD YOUR HEROKU PAGE NAME FOR DEPLOYMENT
-ALLOWED_HOSTS = ['django-mercadito.herokuapp.com']
+ALLOWED_HOSTS = []
+# add this for deployment 'django-mercadito.herokuapp.com'
+
 
 
 # Application definition
@@ -84,18 +88,18 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'mercadito',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mercadito',
+    }
+}
 
 # Production  database settings:
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(
-default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(
+# default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

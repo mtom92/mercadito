@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.sidenav').sidenav();
     $('.modal').modal();
     $("#id_typebusiness").change(function () {
       var url = $("#businessForm").attr("data-categories-url");  // get the url of the `load_cities` view
