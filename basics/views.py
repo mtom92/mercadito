@@ -156,6 +156,7 @@ def search(request):
         return render(request, 'search.html')
 
 def searchb(request):
+    print("estoy aqui !!")
     if request.method == 'GET':
         form = SearchBusiness(request.GET)
         print("this is the form",form)
