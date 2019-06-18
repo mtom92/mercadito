@@ -3,26 +3,26 @@
 {% load my_tags %}
 
 {% block content %}
-<div>
-  <form action="/search" class="form_search" method="get">
-    <div class="row mainsearch">
-      <div class="input-field col s12 ">
-        <i class="material-icons prefix">search</i>
-        <input type="text" name="searcher" id="searcher">
-        <label for="autocomplete-input">What are you looking for?</label>
-      </div>
-      <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
-    </div>
-  </form>
-</div>
 <div class="container">
+  <div>
+    <form action="/search" class="form_search" method="get">
+      <div class="row mainsearch">
+        <div class="input-field col s12 ">
+          <i class="material-icons prefix">search</i>
+          <input type="text" name="searcher" id="searcher">
+          <label for="autocomplete-input">What are you looking for?</label>
+        </div>
+        <button class="btn waves-effect waves-light subbot" type="submit" name="action">Search</button>
+      </div>
+    </form>
+  </div>
   {% if result%}
         {% for  business in result %}
         {% if forloop.counter|modulo:3 == 1 %}
           <div class="row">
         {% endif %}
 
-        <div class="col s4">
+        <div class="col l4">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
             {% if not business.logo %}
@@ -33,7 +33,14 @@
 
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{business.name}}<i class="material-icons right">more_vert</i></span>
+            <div class=" row card-title activator grey-text text-darken-4">
+                <div class="col s11 m11 l11">
+                  {{business.name}}
+                </div>
+                <div class="col s1 m1 l1">
+                  <i class="material-icons right">more_vert</i>
+                </div>
+            </div>
             <p><a href="/business/{{business.id}}">View More</a></p>
           </div>
           <div class="card-reveal">
@@ -67,15 +74,20 @@
 
           {% endfor %}
   {% else %}
-     <h1>Nothing was found</h1>
-     <img src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560180361/empty_code_jsljdk.png" alt="">
+  <div class="row resnot">
+    <div class="col l12 s12">
+      <div class="row">
+        <h1>Nothing was found</h1>
+      </div>
+      <div class="row">
+        <img class="img_no" src="https://res.cloudinary.com/dnkav9q9s/image/upload/v1560180361/empty_code_jsljdk.png" alt="">
+      </div>
+    </div>
+  </div>
   {% endif %}
   {% csrf_token %}
 
 
   </div>
 
-
-
-</div>
 {% endblock %}

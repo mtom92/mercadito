@@ -69,6 +69,7 @@ select{
 }
 
 .mainsearch{
+  margin-top: 20px;
   background-color: white;
   border: 4px solid black;
   display: flex;
@@ -191,6 +192,15 @@ right: 10px;
   font-weight: bold;
 }
 
+.subbot{
+  margin-right: 8px;
+}
+
+.nav-wrapper{
+  margin-right:30px;
+  margin-left: 30px;
+}
+
 .business_info{
   border: 3px solid #0b7fa5;
   border-radius: 20px;
@@ -206,4 +216,22 @@ right: 10px;
   flex-direction:column;
   align-items: center;
   justify-content: center;
+}
+
+.resnot{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_no{
+  height: 400px;
+}
+
+@media only screen and (max-width: 600px){
+
+  .img_no{
+    height: 200px;
+  }
 }
