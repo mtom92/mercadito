@@ -56,16 +56,16 @@ select{
 }
 
 .first_block{
-  height: 30em;
   background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1559970285/mercadok_zf9d5a.jpg");
-  background-repeat: no-repeat;
+  height: 700px;
   background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-size: cover;
 }
 
 .mainsearch{
