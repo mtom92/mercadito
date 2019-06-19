@@ -80,18 +80,20 @@
              {% elif favorite.typebusiness|stringformat:"s" == "products"  %}
                <p class="result_product">Type : Shop/Restaurant</p>
            {% endif %}
-           {% if favorite.category|stringformat:"s" == "plumber"  %}
-             <p class="category_plumber">Category : Plumber</p>
-           {% elif favorite.category|stringformat:"s" == "restaurant"  %}
+           {% if business.category|stringformat:"s" == "Plumbing"  %}
+             <p class="category_plumber">Category : Plumbing</p>
+           {% elif business.category|stringformat:"s" == "Restaurant"  %}
              <p class="category_restaurant">Category: Restaurant</p>
-           {% elif favorite.category|stringformat:"s" == "additions_remodels"  %}
+           {% elif business.category|stringformat:"s" == "Additions_Remodels"  %}
              <p class="category_additions_remodels">Category: Additions & Remodels</p>
-           {% elif favorite.category|stringformat:"s" == "carpentry"  %}
+           {% elif business.category|stringformat:"s" == "Carpentry"  %}
              <p class="category_carpentry">Category: Carpentry</p>
-           {% elif favorite.category|stringformat:"s" == "jewlery_shop"  %}
+           {% elif business.category|stringformat:"s" == "Jewlery_Shop"  %}
              <p class="category_jewlery_shop">Category: Jewlery Shop</p>
-           {% elif favorite.category|stringformat:"s" == "crafts_shop"  %}
+           {% elif business.category|stringformat:"s" == "Crafts_Shop"  %}
              <p class="category_crafts_shop">Category: Crafts Shop</p>
+           {% elif business.category|stringformat:"s" == "Cafe"  %}
+             <p class="category_cafe">Category: Cafe</p>
            {% endif %}
          </div>
        </div>
@@ -147,18 +149,20 @@
              {% elif favorite.business.typebusiness|stringformat:"s" == "products"  %}
                <p class="result_product">Type : Shop/Restaurant</p>
            {% endif %}
-           {% if favorite.business.category|stringformat:"s" == "plumber"  %}
-             <p class="category_plumber">Category : Plumber</p>
-           {% elif favorite.business.category|stringformat:"s" == "restaurant"  %}
+           {% if business.category|stringformat:"s" == "Plumbing"  %}
+             <p class="category_plumber">Category : Plumbing</p>
+           {% elif business.category|stringformat:"s" == "Restaurant"  %}
              <p class="category_restaurant">Category: Restaurant</p>
-           {% elif favorite.business.category|stringformat:"s" == "additions_remodels"  %}
+           {% elif business.category|stringformat:"s" == "Additions_Remodels"  %}
              <p class="category_additions_remodels">Category: Additions & Remodels</p>
-           {% elif favorite.business.category|stringformat:"s" == "carpentry"  %}
+           {% elif business.category|stringformat:"s" == "Carpentry"  %}
              <p class="category_carpentry">Category: Carpentry</p>
-           {% elif favorite.business.category|stringformat:"s" == "jewlery_shop"  %}
+           {% elif business.category|stringformat:"s" == "Jewlery_Shop"  %}
              <p class="category_jewlery_shop">Category: Jewlery Shop</p>
-           {% elif favorite.business.category|stringformat:"s" == "crafts_shop"  %}
+           {% elif business.category|stringformat:"s" == "Crafts_Shop"  %}
              <p class="category_crafts_shop">Category: Crafts Shop</p>
+           {% elif business.category|stringformat:"s" == "Cafe"  %}
+             <p class="category_cafe">Category: Cafe</p>
            {% endif %}
          </div>
        </div>

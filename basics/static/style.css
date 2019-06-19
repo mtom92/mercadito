@@ -160,6 +160,12 @@ right: 10px;
   border-radius: 10px
 }
 
+.category_cafe{
+  background-color: #998858;
+  width: 100px;
+  border-radius: 10px
+}
+
 .type_user_b{
   text-align:center;
   background-color: #42ed5c;
@@ -254,4 +260,9 @@ right: 10px;
   .business_logo{
     height: 150px;
   }
+
+  .first_block {
+    background-attachment: scroll;
+  }
+
 }
