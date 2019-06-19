@@ -179,7 +179,8 @@ right: 10px;
 }
 
 .owner_photo{
-  height: 8vw;
+  height: 70px;
+  width: 80px;
   border-radius: 50%;
 }
 
@@ -227,6 +228,17 @@ right: 10px;
 
 .img_no{
   height: 400px;
+}
+
+.removefav{
+  background-color: #e81710;
+  color: white;
+  font-weight: bold;
+  position:absolute;
+  z-index: 2;
+  top:5px;
+  left: 5px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 600px){
