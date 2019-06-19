@@ -70,6 +70,7 @@ def profile(request, id):
             person = MyUser.objects.get(id=id)
             if Business.objects.filter(owner=id):
                 businesses = Business.objects.filter(owner=id)
+                print(businesses,id)
             else:
                 businesses = []
             path = "/media/" + str(person.profile.avatar)
