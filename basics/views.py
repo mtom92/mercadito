@@ -85,7 +85,7 @@ def profile(request, id):
         if Favorites.objects.filter(person_id=id):
             fav = Favorites.objects.filter(person_id=id)
             person = MyUser.objects.get(id=id)
-            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            path = "/media/" + str(person.profile.avatar)
             return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav})
 
         else:

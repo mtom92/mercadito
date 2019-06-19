@@ -265,4 +265,16 @@ right: 10px;
     background-attachment: scroll;
   }
 
+  .first_block{
+    background-image: url("https://res.cloudinary.com/dnkav9q9s/image/upload/v1559970285/mercadok_zf9d5a.jpg");
+    height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
