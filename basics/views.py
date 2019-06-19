@@ -78,7 +78,7 @@ def profile(request, id):
 
         else:
             person = MyUser.objects.get(id=id)
-            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            path = "/media/" + str(person.profile.avatar)
             return render(request, 'profile.html', {'person': person, 'path':path})
 
     else:
