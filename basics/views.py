@@ -79,8 +79,13 @@ def profile(request, id):
 
         else:
             person = MyUser.objects.get(id=id)
+            if Business.objects.filter(owner=id):
+                businesses = Business.objects.filter(owner=id)
+                print(businesses,id)
+            else:
+                businesses = []
             path = "/media/" + str(person.profile.avatar)
-            return render(request, 'profile.html', {'person': person, 'path':path})
+            return render(request, 'profile.html', {'person': person, 'path':path , "businesses":businesses})
 
     else:
         if Favorites.objects.filter(person_id=id):
