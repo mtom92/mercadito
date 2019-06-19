@@ -72,7 +72,7 @@ def profile(request, id):
                 businesses = Business.objects.filter(owner=id)
             else:
                 businesses = []
-            path = "http://localhost:8000/media/" + str(person.profile.avatar)
+            path = "/media/" + str(person.profile.avatar)
             print(businesses)
             return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav,"businesses":businesses})
 
