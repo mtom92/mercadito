@@ -175,7 +175,7 @@ right: 10px;
 }
 
 .business_logo{
-  height: 10vw;
+  height: 200px;
 }
 
 .owner_photo{
@@ -233,5 +233,13 @@ right: 10px;
 
   .img_no{
     height: 200px;
+  }
+
+  .businessdata{
+    padding-left: 15% !important;
+  }
+
+  .business_logo{
+    height: 150px;
   }
 }
