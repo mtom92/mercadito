@@ -46,7 +46,7 @@ def newbusiness(request):
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
             business = form.save(commit = False)
-            geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw")
+            geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg")
             response = geocoder.forward(business.address, country=['us'])
             collection = response.json()
             coordinates = collection['features'][0]['geometry']['coordinates']

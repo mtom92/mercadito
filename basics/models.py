@@ -57,7 +57,6 @@ class Business(models.Model):
     address = models.CharField(max_length=100)
     telephone = PhoneNumberField()
     typebusiness = models.ForeignKey(TypeBusiness, on_delete=models.SET_NULL, null=True)
-    category= models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     location_latitude = models.CharField('Latitude', max_length=20, null=True, blank=True)
     location_longitude = models.CharField('Longitude', max_length=20, null=True, blank=True)
     photo = models.ImageField(upload_to='media/', null=True, blank=True)

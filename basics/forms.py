@@ -31,7 +31,7 @@ class SignUpForm(UserCreationForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ('name', 'description','logo','address', 'telephone', 'typebusiness', 'category','photo')
+        fields = ('name', 'description','logo','address', 'telephone', 'typebusiness','photo')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['category'].queryset = Category.objects.none()
