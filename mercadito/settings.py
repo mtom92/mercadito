@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.environ.get('WORKING_DIRECTORY','')+'mercadito.db',
+        'NAME': os.environ.get('WORKING_DIRECTORY','')+'/mercadito.db',
     }
 }
 
