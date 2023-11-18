@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # uncomment this for deply
 import dj_database_url
@@ -30,7 +30,7 @@ SECRET_KEY = 'ovaj$38q$9r$5$196n16_-wi)uhor58w^h+zh0h)w&v-$f7231'
 DEBUG = True
 
 # YOU NEED TO ADD YOUR HEROKU PAGE NAME FOR DEPLOYMENT
-ALLOWED_HOSTS = ['django-mercadito.herokuapp.com']
+ALLOWED_HOSTS = ['django-mercadito.herokuapp.com', '127.0.0.1']
 # add this for deployment 'django-mercadito.herokuapp.com'
 
 
@@ -97,9 +97,18 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 
 # Production  database settings:
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(
-default = 'DATABASE_URL: postgres://buooksfxkbmzof:5f850489f34ad7ff01ec5860312afa42c656872b10962804d5d570db37de1fc7@ec2-54-83-9-169.compute-1.amazonaws.com:5432/d5234thhof7blf')
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(
+#     default = 'sqlite:///Users/imarban/workspace/mercadito/mercadito/mercadito.db'
+# )
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.environ.get('WORKING_DIRECTORY','')+'mercadito.db',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
