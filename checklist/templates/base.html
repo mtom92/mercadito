@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mercadito</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+    <body>
+    <header>
+      <nav class="blue-grey darken-3">
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">Mercadito</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+            <li><a  href="{% url 'profile' user.id %}"><i class="material-icons left">account_box</i> Hello ,{{ user.username }}!</a></li>
+            <li><a  href="{% url 'search' %}"><i class="material-icons left">search</i> Search</a></li>
+            <li><a  href="{% url 'logout' %}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+            {% else %}
+            <li><a  href="{% url 'login' %}"><i class="material-icons left">assignment_ind</i>Login</a></li>
+            <li><a  href="{% url 'signup' %}"><i class="material-icons left">create</i>Signup</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        {% if user.is_authenticated %}
+        <li><a  href="{% url 'profile' user.id %}"><i class="material-icons left">account_box</i> Hello ,{{ user.username }}!</a></li>
+        <li><a  href="{% url 'search' %}"><i class="material-icons left">search</i>Search</a></li>
+        <li><a  href="{% url 'logout' %}"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+        {% else %}
+        <li><a  href="{% url 'login' %}"><i class="material-icons left">assignment_ind</i>Login</a></li>
+        <li><a  href="{% url 'signup' %}"><i class="material-icons left">create</i>Signup</a></li>
+        {% endif %}
+      </ul>
+    </header>
+
+      <main>
+        {% block content %}
+        {% endblock %}
+      </main>
+
+      <footer class="page-footer blue-grey darken-3">
+        <div class="footer-copyright">
+          <div class="container">
+            © 2019 Miguel Torres
+
+          </div>
+        </div>
+      </footer>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="{% static 'app.js' %}"></script>
+    </body>
+</html>

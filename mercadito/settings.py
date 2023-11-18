@@ -19,7 +19,6 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -34,11 +33,11 @@ ALLOWED_HOSTS = ['django-mercadito.herokuapp.com', '127.0.0.1']
 # add this for deployment 'django-mercadito.herokuapp.com'
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
     'basics',
+    'checklist',
     'phonenumber_field',
     'mapbox',
     'django.contrib.admin',
@@ -84,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mercadito.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -106,7 +104,7 @@ WSGI_APPLICATION = 'mercadito.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.environ.get('WORKING_DIRECTORY','')+'/mercadito.db',
+        'NAME': os.environ.get('WORKING_DIRECTORY', '') + '/mercadito.db',
     }
 }
 
@@ -128,13 +126,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-LANGUAGES = (('es-mx', _('Spanish')),('en-us', _('English')),)
+LANGUAGES = (('es-mx', _('Spanish')), ('en-us', _('English')),)
 
 TIME_ZONE = 'UTC'
 
@@ -145,7 +142,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
-   os.path.join(BASE_DIR, 'locales')
+    os.path.join(BASE_DIR, 'locales')
 ]
 
 # Static files (CSS, JavaScript, Images)

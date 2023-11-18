@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <p class="flow-text">
+            The following are all the requirements that are needed to open a {{ checklist.category }} business
+        </p>
+
+        <form method="post" enctype="multipart/form-data" id="businessForm"
+              data-categories-url="{% url 'ajax_load_categories' %}" novalidate>
+            {% csrf_token %}
+            {% for req in checklist.requirements %}
+                <p>
+                    <label>
+                        <input type="checkbox" id="{{ req.name }}" name="{{ req.name }}" value="{{ req.display_text }}">
+                        <span>{{ req.display_text }}</span>
+                    </label>
+                </p>
+            {% endfor %}
+            <button class="btn waves-effect waves-light" type="submit" name="action">Save
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+
+
+        <form>
+            {% csrf_token %}
+            <p>
+                <label>
+                    <span>
+                        What's your question?
+                    </span>
+                </label>
+            </p>
+            <label>
+                <input type="text" name="question">
+            </label>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+
+
+        <textarea>
+            Here goes the ChatGPT content
+        </textarea>
+
+    </div>
+{% endblock %}
