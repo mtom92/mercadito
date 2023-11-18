@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chatterbot.ext.django_chatterbot',
 ]
 
 AUTH_USER_MODEL = 'basics.MyUser'
@@ -174,3 +175,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CHATTERBOT = {
+    "name": "Business Support Bot",
+    "logic_adapters": [
+        "chatterbot.logic.BestMatch",
+    ],
+}
