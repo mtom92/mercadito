@@ -217,7 +217,7 @@ def webhook(request):
     elif 'spanish' in msg or 'espanol' in msg or 'español' in msg:
         response = 'Sí, también hablo español. Podemos continuar'
     elif 'negocio de comida' in msg or 'restaurante' in msg or 'taqueria' in msg:
-        response = "Estos son los requisitos son para un negocio de comida" + \
+        response = "Estos son los requisitos para un negocio de comida" + \
                    '\nLicencia de negocio requerida por el gobierno de WA' + \
                    '\nLicencia requerida por el IRS'
 
