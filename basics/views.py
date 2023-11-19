@@ -201,10 +201,13 @@ def webhook(request):
     phone_number_to = request.POST.get('To', '')
     msg = request.POST.get('Body', '')
     msg = msg.lower()
+    response = "Sorry, I'm still learning"
     if 'hi' in msg:
-        response = 'Hello good person'
-    if 'open a business' in msg:
+        response = 'Hello, good person'
+    elif 'open a business' in msg:
         response = 'Here is some information that might be useful'
+    elif 'my business if food related' in msg:
+        response = 'Great! Congratulations on your business! For food you require the following'
 
     message = client.messages.create(
         from_=phone_number_to,
