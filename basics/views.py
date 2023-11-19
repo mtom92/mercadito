@@ -42,6 +42,7 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 def newbusiness(request):
+    print("request", request)
     if request.method == 'POST' and request.user.is_authenticated:
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
@@ -53,8 +54,8 @@ def newbusiness(request):
             business.location_latitude =coordinates[0]
             business.location_longitude =coordinates[1]
             business.owner = request.user
-            business.save()
-            return HttpResponseRedirect('/')
+            target_url = f'/checklist/food/'
+            return HttpResponseRedirect(target_url)
         else:
             print("form was not valid",form.errors, form.non_field_errors)
             return render(request, 'signup.html', {'form': form})
@@ -106,22 +107,22 @@ def business(request, id):
         if form.is_valid():
             form.save()
             business = Business.objects.get(id=id)
-            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg'
             fav = Favorites.objects.filter(person_id=request.user.id)
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
         else:
             business = Business.objects.get(id=id)
-            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
 
     else:
         business = Business.objects.get(id=id)
         if Favorites.objects.filter(person_id=request.user.id).filter(business_id=business.id):
             fav = Favorites.objects.filter(person_id=request.user.id)
-            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
         else:
-            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
+            mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
 
 
