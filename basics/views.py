@@ -14,6 +14,7 @@ from chatterbot.ext.django_chatterbot import settings
 
 chatterbot = ChatBot(**settings.CHATTERBOT)
 
+
 def index(request):
     print("home route")
     return render(request, 'index.html')
@@ -205,13 +206,10 @@ def webhook(request):
     if 'hi' in msg:
         response = 'Hello!'
     if 'open a business' in msg:
-        response = 'Here is some information that you might need'+
-        '\nBusiness license required by the WA govt'+
-        '\nLicense required by the IRS'+
-        '\nBusiness license required by the WA govt'
-        response = 'Hello, good person'
-    elif 'open a business' in msg:
-        response = 'Here is some information that might be useful'
+        response = 'Here is some information that you might need' + \
+                   '\nBusiness license required by the WA govt' + \
+                   '\nLicense required by the IRS' + \
+                   '\nBusiness license required by the WA govt'
     elif 'my business if food related' in msg:
         response = 'Great! Congratulations on your business! For food you require the following'
 
