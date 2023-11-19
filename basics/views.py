@@ -205,13 +205,20 @@ def webhook(request):
     response = "Sorry, I'm still learning"
     if 'hi' in msg:
         response = 'Hello!'
-    if 'open a business' in msg:
+    elif 'open a business' in msg:
+        response = 'Great! What type of business do you have'
+    elif 'food' in msg:
         response = 'Here is some information that you might need' + \
                    '\nBusiness license required by the WA govt' + \
-                   '\nLicense required by the IRS' + \
-                   '\nBusiness license required by the WA govt'
-    elif 'my business if food related' in msg:
-        response = 'Great! Congratulations on your business! For food you require the following'
+                   '\nLicense required by the IRS'
+    elif 'insurance' in msg:
+        response = 'Yes, you will need insurance copies to be submitted to get these licenses'
+    elif 'spanish' in msg or 'espanol' in msg or 'español' in msg:
+        response = 'Sí, también hablo español. Podemos continuar'
+    elif 'negocio de comida' in msg or 'restaurante' in msg or 'taqueria' in msg:
+        response = "Estos son los requisitos son para un negocio de comida" + \
+                   '\nLicencia de negocio requerida por el gobierno de WA' + \
+                   '\nLicencia requerida por el IRS'
 
     message = client.messages.create(
         from_=phone_number_to,
