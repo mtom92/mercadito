@@ -203,8 +203,9 @@ def webhook(request):
     msg = request.POST.get('Body', '')
     msg = msg.lower()
     response = "Sorry, I'm still learning"
-    if 'hi' in msg:
-        response = 'Hello!'
+
+    if 'hi' in msg or 'hey' in msg or 'hello' in msg:
+        response = 'Hello! How can I help?'
     elif 'open a business' in msg:
         response = 'Great! What type of business do you have'
     elif 'food' in msg:
