@@ -9,6 +9,8 @@ from .models import Business, Favorites, TypeBusiness, Category
 from django.views.decorators.csrf import csrf_exempt
 from twilio.rest import Client
 import os
+from chatterbot import ChatBot
+from chatterbot.ext.django_chatterbot import settings
 
 
 def index(request):
@@ -198,9 +200,13 @@ def webhook(request):
     phone_number_to = request.POST.get('To', '')
     msg = request.POST.get('Body', '')
 
+    chatterbot = ChatBot(**settings.CHATTERBOT)
+    response = chatterbot.get_response(input_data)
+    response_data = response.serialize()
+
     message = client.messages.create(
         from_=phone_number_to,
-        body=msg,
+        body=response_data["text"],
         to=phone_number_from
     )
 
