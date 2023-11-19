@@ -201,7 +201,23 @@ def webhook(request):
     phone_number_to = request.POST.get('To', '')
     msg = request.POST.get('Body', '')
 
-    response = chatterbot.get_response(msg)
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('open a business'):
+        response = 'Here is some information that might be useful'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+    if msg.contains('hi'):
+        response = 'Hello good person'
+
     response_data = response.serialize()
 
     message = client.messages.create(
