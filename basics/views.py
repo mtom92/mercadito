@@ -203,6 +203,12 @@ def webhook(request):
     msg = msg.lower()
     response = "Sorry, I'm still learning"
     if 'hi' in msg:
+        response = 'Hello!'
+    if 'open a business' in msg:
+        response = 'Here is some information that you might need'+
+        '\nBusiness license required by the WA govt'+
+        '\nLicense required by the IRS'+
+        '\nBusiness license required by the WA govt'
         response = 'Hello, good person'
     elif 'open a business' in msg:
         response = 'Here is some information that might be useful'
