@@ -16,6 +16,7 @@ urlpatterns = [
     path('searchb/', views.searchb, name='searchb'),
     path('ajax/load-categories/', views.load_categories, name='ajax_load_categories'),
     path("admin/", admin.site.urls),
+    path('webhook/', views.webhook),
 ]
 
 if settings.DEBUG:
