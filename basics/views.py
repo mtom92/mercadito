@@ -200,23 +200,11 @@ def webhook(request):
     phone_number_from = request.POST.get('From', '')
     phone_number_to = request.POST.get('To', '')
     msg = request.POST.get('Body', '')
-
-    if msg.contains('hi'):
+    msg = msg.lower()
+    if 'hi' in msg:
         response = 'Hello good person'
-    if msg.contains('open a business'):
+    if 'open a business' in msg:
         response = 'Here is some information that might be useful'
-    if msg.contains('hi'):
-        response = 'Hello good person'
-    if msg.contains('hi'):
-        response = 'Hello good person'
-    if msg.contains('hi'):
-        response = 'Hello good person'
-    if msg.contains('hi'):
-        response = 'Hello good person'
-    if msg.contains('hi'):
-        response = 'Hello good person'
-    if msg.contains('hi'):
-        response = 'Hello good person'
 
     response_data = response.serialize()
 
