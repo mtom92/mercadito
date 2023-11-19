@@ -206,11 +206,9 @@ def webhook(request):
     if 'open a business' in msg:
         response = 'Here is some information that might be useful'
 
-    response_data = response.serialize()
-
     message = client.messages.create(
         from_=phone_number_to,
-        body=response_data["text"],
+        body=response,
         to=phone_number_from
     )
 
