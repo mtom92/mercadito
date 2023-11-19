@@ -201,7 +201,7 @@ def webhook(request):
     msg = request.POST.get('Body', '')
 
     chatterbot = ChatBot(**settings.CHATTERBOT)
-    response = chatterbot.get_response(input_data)
+    response = chatterbot.get_response(msg)
     response_data = response.serialize()
 
     message = client.messages.create(
