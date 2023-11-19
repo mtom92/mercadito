@@ -12,6 +12,7 @@ import os
 from chatterbot import ChatBot
 from chatterbot.ext.django_chatterbot import settings
 
+chatterbot = ChatBot(**settings.CHATTERBOT)
 
 def index(request):
     print("home route")
@@ -200,7 +201,6 @@ def webhook(request):
     phone_number_to = request.POST.get('To', '')
     msg = request.POST.get('Body', '')
 
-    chatterbot = ChatBot(**settings.CHATTERBOT)
     response = chatterbot.get_response(msg)
     response_data = response.serialize()
 
