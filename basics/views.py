@@ -185,5 +185,5 @@ def load_categories(request):
 
 @csrf_exempt
 def webhook(request):
-    print(request)
+    print(request.body)
     return HttpResponse("OK")
