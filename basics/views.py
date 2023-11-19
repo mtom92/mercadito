@@ -5,8 +5,10 @@ from .forms import LoginForm, SignUpForm, BusinessForm, Search, FavoritesForm, S
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
-from . models import Business , Favorites, TypeBusiness, Category
+from .models import Business, Favorites, TypeBusiness, Category
 from django.views.decorators.csrf import csrf_exempt
+from twilio.rest import Client
+import os
 
 
 def index(request):
@@ -21,10 +23,10 @@ def login_view(request):
         if form.is_valid():
             u = form.cleaned_data['username']
             p = form.cleaned_data['password']
-            user = authenticate(username = u, password = p)
+            user = authenticate(username=u, password=p)
             print(user)
             if user is not None:
-                if user. is_active:
+                if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect('/')
                 else:
@@ -42,21 +44,23 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def newbusiness(request):
     if request.method == 'POST' and request.user.is_authenticated:
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
-            business = form.save(commit = False)
-            geocoder = Geocoder(access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg")
+            business = form.save(commit=False)
+            geocoder = Geocoder(
+                access_token="pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNscDRtdzZhejB5bGYya21pcXllaGphM2kifQ.CPoqHJARN8PAAZ493bWvjg")
             response = geocoder.forward(business.address, country=['us'])
             collection = response.json()
             coordinates = collection['features'][0]['geometry']['coordinates']
-            business.location_latitude =coordinates[0]
-            business.location_longitude =coordinates[1]
+            business.location_latitude = coordinates[0]
+            business.location_longitude = coordinates[1]
             business.owner = request.user
             business.save()
         else:
-            print("form was not valid",form.errors, form.non_field_errors)
+            print("form was not valid", form.errors, form.non_field_errors)
             return render(request, 'signup.html', {'form': form})
     else:
         form = BusinessForm()
@@ -70,34 +74,35 @@ def profile(request, id):
             person = MyUser.objects.get(id=id)
             if Business.objects.filter(owner=id):
                 businesses = Business.objects.filter(owner=id)
-                print(businesses,id)
+                print(businesses, id)
             else:
                 businesses = []
             path = "/media/" + str(person.profile.avatar)
             print(businesses)
-            return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav,"businesses":businesses})
+            return render(request, 'profile.html',
+                          {'person': person, 'path': path, "fav": fav, "businesses": businesses})
 
         else:
             person = MyUser.objects.get(id=id)
             if Business.objects.filter(owner=id):
                 businesses = Business.objects.filter(owner=id)
-                print(businesses,id)
+                print(businesses, id)
             else:
                 businesses = []
             path = "/media/" + str(person.profile.avatar)
-            return render(request, 'profile.html', {'person': person, 'path':path , "businesses":businesses})
+            return render(request, 'profile.html', {'person': person, 'path': path, "businesses": businesses})
 
     else:
         if Favorites.objects.filter(person_id=id):
             fav = Favorites.objects.filter(person_id=id)
             person = MyUser.objects.get(id=id)
             path = "/media/" + str(person.profile.avatar)
-            return render(request, 'profile.html', {'person': person, 'path':path,"fav":fav})
+            return render(request, 'profile.html', {'person': person, 'path': path, "fav": fav})
 
         else:
             person = MyUser.objects.get(id=id)
             path = "/media/" + str(person.profile.avatar)
-            return render(request, 'profile.html', {'person': person, 'path':path})
+            return render(request, 'profile.html', {'person': person, 'path': path})
 
 
 def business(request, id):
@@ -108,7 +113,7 @@ def business(request, id):
             business = Business.objects.get(id=id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
             fav = Favorites.objects.filter(person_id=request.user.id)
-            return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox, "fav": fav})
         else:
             business = Business.objects.get(id=id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
@@ -119,11 +124,10 @@ def business(request, id):
         if Favorites.objects.filter(person_id=request.user.id).filter(business_id=business.id):
             fav = Favorites.objects.filter(person_id=request.user.id)
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
-            return render(request, 'business.html', {'business': business, 'mapbox': mapbox,"fav":fav})
+            return render(request, 'business.html', {'business': business, 'mapbox': mapbox, "fav": fav})
         else:
             mapbox = 'pk.eyJ1IjoibXRvbTkyIiwiYSI6ImNqdWxveTFvMTI1N2Y0M25xZThwNnZ6Z3YifQ.9HGeUBB23XGsO1inCsw8vw'
             return render(request, 'business.html', {'business': business, 'mapbox': mapbox})
-
 
 
 def signup(request):
@@ -140,7 +144,7 @@ def signup(request):
             login(request, user)
             return HttpResponseRedirect('/')
         else:
-            print("form was not valid",form.errors, form.non_field_errors)
+            print("form was not valid", form.errors, form.non_field_errors)
             return render(request, 'signup.html', {'form': form})
     else:
         form = SignUpForm()
@@ -153,26 +157,27 @@ def search(request):
         if form.is_valid():
             s = form.cleaned_data['searcher']
             result = Business.objects.filter(name__icontains=s)
-            return render(request, 'search_result.html', {'result':result})
+            return render(request, 'search_result.html', {'result': result})
         else:
-            print("form was not valid",form.errors)
-            print("fields error", form.non_field_errors )
+            print("form was not valid", form.errors)
+            print("fields error", form.non_field_errors)
             return render(request, 'search.html', {'form': form})
     else:
         return render(request, 'search.html')
+
 
 def searchb(request):
     print("estoy aqui !!")
     if request.method == 'GET':
         form = SearchBusiness(request.GET)
-        print("this is the form",form)
+        print("this is the form", form)
         if form.is_valid():
             s = form.cleaned_data['type']
             result = Business.objects.filter(typebusiness_id=s)
-            return render(request, 'search_result.html', {'result':result})
+            return render(request, 'search_result.html', {'result': result})
         else:
-            print("form was not valid",form.errors)
-            print("fields error", form.non_field_errors )
+            print("form was not valid", form.errors)
+            print("fields error", form.non_field_errors)
             return render(request, 'search.html', {'form': form})
     else:
         return render(request, 'search.html')
@@ -183,7 +188,21 @@ def load_categories(request):
     categories = Category.objects.filter(typebusiness_id=typebusiness_id).order_by('name')
     return render(request, 'hr/category_dropdown_list_options.html', {'categories': categories})
 
+
 @csrf_exempt
 def webhook(request):
-    print(request.body)
+    account_sid = 'AC9030fb8d0a2e52b72adcdb6b45de368d'
+    auth_token = os.environ.get('TWILIO_TOKEN', '')
+    client = Client(account_sid, auth_token)
+    phone_number_from = request.POST.get('From', '')
+    phone_number_to = request.POST.get('To', '')
+    msg = request.POST.get('Body', '')
+
+    message = client.messages.create(
+        from_=phone_number_to,
+        body=msg,
+        to=phone_number_from
+    )
+
+    print(message.sid)
     return HttpResponse("OK")
