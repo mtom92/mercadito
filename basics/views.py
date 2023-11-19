@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
 from . models import Business , Favorites, TypeBusiness, Category
-from django.views.decoratos.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
