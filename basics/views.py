@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from mapbox import Geocoder
 from . models import Business , Favorites, TypeBusiness, Category
+from django.views.decoratos.csrf import csrf_exempt
 
 
 def index(request):
@@ -54,8 +55,7 @@ def newbusiness(request):
             business.location_longitude =coordinates[1]
             business.owner = request.user
             business.save()
-            return HttpResponseRedirect('/checklist')
-        else:
+         else:
             print("form was not valid",form.errors, form.non_field_errors)
             return render(request, 'signup.html', {'form': form})
     else:
@@ -182,7 +182,7 @@ def load_categories(request):
     typebusiness_id = request.GET.get('typebusiness')
     categories = Category.objects.filter(typebusiness_id=typebusiness_id).order_by('name')
     return render(request, 'hr/category_dropdown_list_options.html', {'categories': categories})
-
+@csrf_exempt
 def webhook(request):
     print(request)
     return HttpResponse("OK")
